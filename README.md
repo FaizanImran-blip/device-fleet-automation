@@ -1,114 +1,72 @@
-# 📱 Device Fleet Automation (AI-style Mobile Automation Engine)
+# YouTube UI Automation Framework (uiautomator2)
 
-A Python-based multi-device mobile automation system built using **ADB + uiautomator2**, designed to control Android emulators and real devices for automated app interactions like YouTube search, scrolling, and task execution.
-
----
-
-## 🚀 Features
-
-* 🔌 Multi-device support (Real Android + Emulators)
-* 📱 Automatic device detection (ADB)
-* ⚙️ Task queue system for handling automation jobs
-* 🤖 App automation (YouTube, Chrome, Docs, Camera, etc.)
-* 🔍 UI-based automation using `uiautomator2` (no coordinate tapping)
-* 🔁 Worker threads per device (parallel execution)
-* 📊 Device state tracking (FREE / BUSY)
-* 🧠 Fallback system for app launching (monkey + am start)
+A modular Android UI automation framework built with Python and `uiautomator2` for reliable interaction with the YouTube application. The system is designed with extensibility, fault tolerance, and maintainability in mind.
 
 ---
 
-## 🏗 Architecture
+## 🎯 Objective
 
-```
-User Input → Task Queue → Device Pool → Worker Thread
-                           ↓
-                    ADB Controller
-                           ↓
-                 UIAutomation Layer
-                           ↓
-                App Automation Logic
-```
+This repository is not a script collection—it is a **foundation-level automation framework**.
+
+The intent is to:
+- Standardize Android UI automation workflows
+- Provide a reusable architecture for device interaction
+- Enable scalable extension for advanced automation strategies (AI-assisted or rule-based)
 
 ---
 
-## 📦 Tech Stack
+## 🧱 Architecture Overview
 
-* Python 3
-* ADB (Android Debug Bridge)
-* uiautomator2
-* threading + queue (Python concurrency)
+The system is designed around separation of concerns:
 
----
+- **Device Layer** → Connection & ADB communication
+- **UI Detection Layer** → Element resolution (resourceId / text / description)
+- **Action Layer** → Click, input, swipe operations
+- **Flow Controller** → Execution sequencing & retry logic
+- **Failure Handling Layer** → Timeout, fallback, and recovery logic
 
-## 📲 Supported Devices
-
-* Android Emulators (AVD)
-* Real Android Devices (USB / Wireless ADB)
-* iOS simulator detection (basic support)
+This separation allows independent upgrades without breaking core flows.
 
 ---
 
-## 🧠 How It Works
+## ⚙️ Core Capabilities
 
-1. System detects connected devices via ADB
-2. Creates a device pool (threads per device)
-3. User sends app task (e.g., "youtube")
-4. Task is assigned to an available device
-5. For YouTube:
-
-   * Opens app
-   * Finds search button via UI selectors
-   * Types query (e.g., "MrBeast")
-   * Executes search
-   * Scrolls results automatically
-
----
-
-## ▶️ Run Project
-
-```bash
-python main.py
-```
+- Device initialization via `uiautomator2`
+- YouTube app lifecycle management
+- Multi-strategy UI element detection:
+  - resourceId-based
+  - text-based
+  - description-based
+- UI readiness validation with timeout control
+- Automated search execution pipeline
+- Continuous scroll automation loop
+- Basic failure detection and termination safeguards
 
 ---
 
-## 📌 Example Commands
+## 🧠 Execution Model
 
-```
-Enter app (chrome/docs/camera/exit): youtube
-Enter app (chrome/docs/camera/exit): chrome
-Enter app (chrome/docs/camera/exit): camera
-```
+The automation follows a deterministic execution pipeline:
 
----
+1. Initialize device connection
+2. Launch target application (YouTube)
+3. Validate UI readiness within bounded timeout
+4. Resolve primary action node (Search)
+5. Execute input transaction (query injection)
+6. Transition into post-search navigation flow
+7. Maintain scroll execution loop
 
-## ⚠️ Notes
-
-* Requires USB debugging enabled (for real devices)
-* Emulator must be running before execution
-* YouTube UI elements may vary by version (handled via fallback selectors)
-* System is designed for learning & automation experimentation
+Each stage is isolated to prevent cascading failures.
 
 ---
 
-## 🔧 Future Improvements
+## 🛠 Tech Stack
 
-* AI-based UI self-healing selectors
-* OpenCV fallback for UI detection
-* OCR-based text recognition
-* Advanced scheduling system
-* Cloud-based device orchestration
-
----
-
-## 💡 Goal
-
-This project is built to explore:
-
-> “How AI-style automation systems interact with real mobile UIs in a scalable way.”
+- Python 3.x
+- uiautomator2
+- Android Debug Bridge (ADB)
+- Android Emulator / Physical Android Device
 
 ---
 
-## 👨‍💻 Author
-
-Faizan — Mobile Automation & AI Systems Learner
+## 📁 Recommended Project Structure
