@@ -1,5 +1,5 @@
 # YouTube UI Automation Framework (uiautomator2)
-
+-
 A modular Android UI automation framework built with Python and `uiautomator2` for reliable interaction with the YouTube application. The system is designed with extensibility, fault tolerance, and maintainability in mind.
 
 ---
